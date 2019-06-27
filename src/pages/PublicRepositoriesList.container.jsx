@@ -7,7 +7,9 @@ import * as repositoriesActions from '../store/repositories/actions';
 export default connect(
   (state) => ({
     repositories: repositoriesSelectors.getList(state),
-    username: userSelectors.getUsername(state)
+    isFetching: repositoriesSelectors.isFetching(state),
+    username: userSelectors.getUsername(state),
+    hasError: repositoriesSelectors.hasError(state)
   }),
   repositoriesActions
 )(PublicRepositoriesList);

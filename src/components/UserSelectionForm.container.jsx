@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import UserSelection from './UserSelection';
+import UserSelectionForm from './UserSelectionForm';
 import * as userSelectors from '../store/user/selectors';
 import * as userActions from '../store/user/actions';
 
@@ -8,4 +8,4 @@ export default connect(
     username: userSelectors.getUsername(state)
   }),
   userActions
-)(UserSelection);
+)(UserSelectionForm);

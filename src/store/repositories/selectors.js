@@ -3,9 +3,9 @@ export function getList(state) {
 }
 
 export function isFetching(state) {
-  return state.repositories.isEditing;
+  return state.repositories.isFetching;
 }
 
 export function hasError(state) {
-  return state.repositories.fetchError;
+  return Boolean(state.repositories.fetchError);
 }

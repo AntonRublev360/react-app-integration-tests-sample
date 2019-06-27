@@ -8,4 +8,4 @@ const rootReducer = combineReducers({
   repositories
 });
 
-export default createStore(rootReducer, applyMiddleware(thunk));
+export default () => createStore(rootReducer, applyMiddleware(thunk));

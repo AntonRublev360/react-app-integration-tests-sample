@@ -6,6 +6,9 @@ export default {
   },
   repositories: {
     header: '{username}\'s public repositories:',
-    view: 'View on GitHub'
+    view: 'View on GitHub',
+    loadingText: 'Loading repositories...',
+    error: 'Failed to load the list of user\'s repositories',
+    empty: 'No repositories found'
   }
 };

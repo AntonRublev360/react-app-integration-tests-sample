@@ -36,5 +36,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^8.0.4",
+    "@testing-library/user-event": "^4.1.0",
+    "jest-dom": "^3.5.0",
+    "nock": "^10.0.6"
   }
 }

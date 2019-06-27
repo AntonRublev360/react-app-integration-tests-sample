@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Divider, IconButton, List, ListItem, ListItemText, ListItemSecondaryAction, Typography } from '@material-ui/core';
-import { GithubCircle } from 'mdi-material-ui';
+import {
+  Container,
+  Typography
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import intl from 'react-intl-universal';
+import LoadingIndicator from '../components/LoadingIndicator';
+import UserRepositoriesList from '../components/UserRepositories/UserRepositoriesList';
 
 const useStyles = makeStyles(theme => ({
   header: {
     margin: theme.spacing(3, 0, 2, 0)
   },
-  list: {
-
-  },
-  listItemHeader: {
-    display: 'flex'
+  loadingIndicator: {
+    margin: 'auto',
+    display: 'block'
   }
 }));
 
 export default function PublicRepositoriesList({
   repositories,
   fetchRepositories,
-  username
+  username,
+  isFetching,
+  hasError
 }) {
   const classes = useStyles();
   useEffect(() => {
@@ -31,47 +35,27 @@ export default function PublicRepositoriesList({
       <Typography variant="h3" component="h1" className={classes.header}>
         {intl.get('repositories.header', { username })}
       </Typography>
-      <List className={classes.list}>
-        {repositories.map(repository => (
-          <PublicRepositoryListItem {...repository} key={repository.id} />
-        ))}
-      </List>
+      <LoadingIndicator
+        className={classes.loadingIndicator}
+        isLoading={isFetching}
+        text={intl.get('repositories.loadingText')}
+      />
+      <UserRepositoriesList
+        repositories={repositories}
+        username={username}
+        isFetching={isFetching}
+        hasError={hasError}
+      />
     </Container>
-  );
-}
-
-function PublicRepositoryListItem({
-  name,
-  description,
-  html_url
-}) {
-  return (
-    <React.Fragment>
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary={name}
-          secondary={description}
-        />
-        <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            aria-label={intl.get('repositories.view')}
-            href={html_url}
-            target="_blank"
-          >
-            <GithubCircle />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
-      <Divider component="li" />
-    </React.Fragment>
   );
 }
 
 PublicRepositoriesList.propTypes = {
   repositories: PropTypes.array,
   username: PropTypes.string.isRequired,
-  fetchRepositories: PropTypes.func.isRequired
+  fetchRepositories: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool,
+  hasError: PropTypes.bool
 };
 
 PublicRepositoriesList.defaultProps = {
