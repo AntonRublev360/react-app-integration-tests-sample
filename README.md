@@ -1,7 +1,7 @@
 # react-app-integration-tests-sample
 Sample integration tests implementation for a common react app structure
 
-[Read more about the the project and reasoning here.](https://www.toptal.com/blog/ADD_ARTICLE_LINK_HERE_WHEN_PUBLISHED)
+[Read more about the the project and reasoning here.](https://www.toptal.com/react/react-testing-library-tutorial)
 
 ## App implementation details
 
