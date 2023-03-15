@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import UserSelectionForm from '../components/UserSelectionForm.container';
+import { Container, Paper }  from '@mui/material'
+import { makeStyles } from '@mui/styles';
+import UserSelectionForm from '../components/UserSelectionForm';
 
 const useStyles = makeStyles(theme => ({
   paper: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ThemeProvider from './components/ThemeProvider';
-import Pages from './pages/Pages.container';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Pages from './pages/Pages'
+import CssBaseline from '@mui/material/CssBaseline';
 import StoreProvider from './components/StoreProvider';
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
     <ThemeProvider>
       <CssBaseline>
         <StoreProvider>
-          <Pages />
+          <Pages isEditingUsername={true}/>
         </StoreProvider>
       </CssBaseline>
     </ThemeProvider>

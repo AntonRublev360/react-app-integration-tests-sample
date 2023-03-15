@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   List,
   ListItem,
   ListItemText,
   Typography
-} from '@material-ui/core';
+}  from '@mui/material';
 import intl from 'react-intl-universal';
 import UserRepositoriesListItem from './UserRepositoriesListItem';
 
@@ -36,13 +35,3 @@ export default function UserRepositoriesList({
     </List>
   );
 }
-
-UserRepositoriesList.propTypes = {
-  repositories: PropTypes.array,
-  isFetching: PropTypes.bool,
-  hasError: PropTypes.bool
-};
-
-UserRepositoriesList.defaultProps = {
-  repositories: []
-};

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Provider } from 'react-redux'
-import createStore from '../store/index';
+import store from '../store/index';
 
 export default function StoreProvider({ children }) {
   /*
@@ -8,9 +8,9 @@ export default function StoreProvider({ children }) {
     However, in tests the app is rendered multiple times.
     useMemo hook below ensures that store is re-created every time the app is first rendered in the dom
   */
-  const store = useMemo(() => createStore(), []);
+  const loadedStore = useMemo(() => store, []);
   return (
-    <Provider store={store}>
+    <Provider store={loadedStore}>
       {children}
     </Provider>
   );
