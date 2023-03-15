@@ -1,12 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import PublicRepositoriesList from './PublicRepositoriesList.container';
+import { useSelector } from 'react-redux';
+import PublicRepositoriesList from './PublicRepositoriesList';
 import UserSelection from './UserSelection';
+import {
+  isEditingUsername as _isEditingUsername
+} from '../store/user/selectors'
 
-export default function Pages({
-  isEditingUsername
-}) {
+export default function Pages() {
+  const isEditingUsername = useSelector(_isEditingUsername)
   return (
     <BrowserRouter>
       <Switch>
@@ -24,7 +26,3 @@ export default function Pages({
     </BrowserRouter>
   );
 }
-
-Pages.propTypes = {
-  isEditingUsername: PropTypes.bool
-};

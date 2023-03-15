@@ -1,8 +1,7 @@
 import React from 'react';
-import { ThemeProvider as MuiThermeProvider } from '@material-ui/styles';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThermeProvider, responsiveFontSizes, createTheme }  from '@mui/material';
 
-const theme = responsiveFontSizes(createMuiTheme({
+const theme = responsiveFontSizes(createTheme({
   typography: {
     useNextVariants: true
   },

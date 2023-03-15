@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { CircularProgress, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
+import { CircularProgress, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,12 +29,3 @@ export default function LoadingIndicator({
     </div>
   );
 }
-
-LoadingIndicator.propTypes = {
-  isLoading: PropTypes.bool,
-  text: PropTypes.node
-};
-
-LoadingIndicator.defaultProps = {
-  isLoading: false
-};

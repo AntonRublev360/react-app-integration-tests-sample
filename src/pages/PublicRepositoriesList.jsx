@@ -1,13 +1,24 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import {
   Container,
   Typography
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+} from '@mui/material'
+import { makeStyles } from '@mui/styles';
 import intl from 'react-intl-universal';
 import LoadingIndicator from '../components/LoadingIndicator';
 import UserRepositoriesList from '../components/UserRepositories/UserRepositoriesList';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getUsername as _getUsername
+} from '../store/user/selectors'
+import {
+  getList, 
+  isFetching as _isFetching,
+  hasError as _hasError
+} from '../store/repositories/selectors'
+import {
+  fetchRepositories
+} from '../store/repositories/actions'
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -19,20 +30,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PublicRepositoriesList({
-  repositories,
-  fetchRepositories,
-  username,
-  isFetching,
-  hasError
-}) {
+export default function PublicRepositoriesList() {
+  const repositories = useSelector(getList)
+  const username = useSelector(_getUsername)
+  const isFetching = useSelector(_isFetching)
+  const hasError = useSelector(_hasError)
+  const dispatch = useDispatch(); 
   const classes = useStyles();
   useEffect(() => {
-    fetchRepositories(username);
-  }, [username, fetchRepositories]);
+    const runAsync = async () => {
+      await dispatch(fetchRepositories(username))
+    };
+    runAsync();
+  }, []);
   return (
     <Container maxWidth="md">
-      <Typography variant="h3" component="h1" className={classes.header}>
+      <Typography variant="h3" component="h1" >
         {intl.get('repositories.header', { username })}
       </Typography>
       <LoadingIndicator
@@ -50,14 +63,3 @@ export default function PublicRepositoriesList({
   );
 }
 
-PublicRepositoriesList.propTypes = {
-  repositories: PropTypes.array,
-  username: PropTypes.string.isRequired,
-  fetchRepositories: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool,
-  hasError: PropTypes.bool
-};
-
-PublicRepositoriesList.defaultProps = {
-  repositories: []
-};

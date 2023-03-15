@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Divider,
   IconButton,
   ListItem,
   ListItemText,
   ListItemSecondaryAction
-} from '@material-ui/core';
-import { GithubCircle } from 'mdi-material-ui';
+} from '@mui/material';
+import { Github } from 'mdi-material-ui';
 import intl from 'react-intl-universal';
 
 export default function PublicRepositoryListItem({
@@ -16,7 +15,7 @@ export default function PublicRepositoryListItem({
   html_url
 }) {
   return (
-    <React.Fragment>
+    <>
       <ListItem alignItems="flex-start">
         <ListItemText
           primary={name}
@@ -29,17 +28,11 @@ export default function PublicRepositoryListItem({
             href={html_url}
             target="_blank"
           >
-            <GithubCircle title={intl.get('repositories.view')} />
+            <Github title={intl.get('repositories.view')} />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
       <Divider component="li" />
-    </React.Fragment>
+      </>
   );
 }
-
-PublicRepositoryListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  html_url: PropTypes.string.isRequired
-};

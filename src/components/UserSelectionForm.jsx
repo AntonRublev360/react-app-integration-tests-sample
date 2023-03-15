@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Button, Grid, TextField, InputAdornment } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { GithubCircle } from 'mdi-material-ui';
+import { Button, Grid, TextField, InputAdornment } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Github } from 'mdi-material-ui';
 import intl from 'react-intl-universal';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getUsername
+} from '../store/user/selectors'
+import {
+  setUsername
+} from '../store/user/actions'
 
 const GitHubUserInputProps = {
   startAdornment: (
     <InputAdornment position="start">
-      <GithubCircle />
+      <Github />
     </InputAdornment>
   ),
 };
@@ -19,20 +25,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function UserSelectionForm({
-  username,
-  setUsername
-}) {
+export default function UserSelectionForm() {
+  const username = useSelector(getUsername)
+  const dispatch = useDispatch();  
   const classes = useStyles();
   const [newUsername, setNewUsername] = useState(username);
+
   const handlenewUsernameChange = (e) => {
-    const value = e.target.value;
-    setNewUsername(value);
+    setNewUsername(e.target.value);
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsername(newUsername);
+    dispatch(setUsername(newUsername))
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <Grid container alignItems="center">
@@ -62,8 +68,3 @@ export default function UserSelectionForm({
     </form>
   );
 }
-
-UserSelectionForm.propTypes = {
-  username: PropTypes.string,
-  setUsername: PropTypes.func.isRequired
-};
